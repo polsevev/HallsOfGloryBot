@@ -1,3 +1,4 @@
+import random
 
 import requests
 import os
@@ -7,6 +8,7 @@ GUILD = os.getenv('Rolf\'s bot testing')
 
 bot = commands.Bot(command_prefix='$')
 
+translateAPI = "https://api.funtranslations.com/translate/"
 
 @bot.event
 async def on_ready():
@@ -36,6 +38,20 @@ async def trump(ctx):
     year = date[:4]
     message = name + " said \"" + text + "\" in " + year
     await ctx.send(message)
+
+@bot.command(brief = "Get some good advice")
+async def advice(ctx):
+    response = requests.get("https://api.adviceslip.com/advice")
+    text = response.json()
+    await ctx.send(text["slip"]["advice"])
+
+@bot.command(brief = "Get a random cat fact")
+async def catfact(ctx):
+    response = requests.get("https://cat-fact.herokuapp.com/facts")
+    size = len(response.json())
+    index = random.randint(0, size-1)
+    await ctx.send(response.json()[index]["text"])
+
 
 
 bot.run("")
