@@ -52,6 +52,16 @@ async def catfact(ctx):
     index = random.randint(0, size-1)
     await ctx.send(response.json()[index]["text"])
 
+@bot.command(brief = "POGCHAMP!")
+async def pogchamp(ctx):
+    await ctx.send("POGCHAMP!")
+
+@bot.command(brief = "I want to die")
+async def pogchamp(ctx):
+    await ctx.send("Kille me please")
+
+
+
 
 
 bot.run("")
